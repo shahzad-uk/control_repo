@@ -1,0 +1,12 @@
+puppet1:
+  ip: 192.168.66.100
+  cpus: 2
+  memory: 512
+  type: puppetmaster
+
+web1:
+  ip: 192.168.66.101
+  cpus: 2
+  memory: 512
+  type: webserver
+
