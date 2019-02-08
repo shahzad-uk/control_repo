@@ -24,11 +24,6 @@ cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
 chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
 
 
-mkdir -p /opt/puppet-dev
-cd /opt/puppet-dev
-git clone -b marcin_dev --single-branch git@github.com:moolibdensplk/control_repo.git
-
-
 echo "RUNNING Shahzad script part"
 sleep 10
 
@@ -58,6 +53,9 @@ touch pe.conf
 echo '{' >> pe.conf
 echo '"console_admin_password"': '"puppet"' >> pe.conf
 echo '"puppet_enterprise::puppet_master_host"': '"master.puppet.vm"' >> pe.conf
+echo '"puppet_enterprise::profile::master::r10k_remote": "git@github.com:moolibdensplk/control_repo.git"' >> pe.conf
+echo '"puppet_enterprise::profile::master::r10k_private_key": "/etc/puppetlabs/puppetserver/ssh/id-rsa"' >> pe.conf
+echo '"puppet_enterprise::profile::master::code_manager_auto_configure": true' >> pe.conf
 echo '}' >> pe.conf
 
 # Run Puppet installation
@@ -66,6 +64,9 @@ puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.
 
 # copy the Classification from the console (4 settings)
 #puppet_enterprise::profile::master :: code_manager_auto_configure 
+
+
+
 
 
 
