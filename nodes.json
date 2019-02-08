@@ -3,20 +3,20 @@
     "master.puppet.vm": {
       ":ip": "192.168.65.100",
       "ports": [],
-      ":memory": 1024,
+      ":memory": 8192,
       ":bootstrap": "bootstrap_master.sh"
     },
 
-    "node1..puppet.vm": {
+    "node1.puppet.vm": {
       ":ip": "192.168.65.101",
       "ports": [],
-      ":memory": 1024,
+      ":memory": 2048,
       ":bootstrap": "bootstrap_node.sh"
     },
-    "node02..puppet.vm": {
+    "node2.puppet.vm": {
       ":ip": "192.168.65.102",
       "ports": [],
-      ":memory": 1024,
+      ":memory": 2048,
       ":bootstrap": "bootstrap_node.sh"
     }
   }
