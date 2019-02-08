@@ -62,8 +62,10 @@ echo '}' >> pe.conf
 puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.conf
 
 
-# copy the Classification from the console (4 settings)
-#puppet_enterprise::profile::master :: code_manager_auto_configure 
+#deploy SSH keys for code manager
+cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
+chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
+
 
 
 
