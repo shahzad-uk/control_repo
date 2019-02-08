@@ -20,7 +20,7 @@ public_key = IO.read(public_key_path)
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.ssh.insert_key = false
   config.ssh.private_key_path = [ private_key_path, insecure_key_path ]
 

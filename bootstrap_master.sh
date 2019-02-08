@@ -2,13 +2,30 @@
  
 # Run on VM to bootstrap Puppet Master server
  
-    # Configure /etc/hosts file
-    echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.65.100  master.puppet.vm  master" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.65.101  node1.puppet.vm  node1" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.65.102  node2.puppet.vm  node2" | sudo tee --append /etc/hosts 2> /dev/null
+# Configure /etc/hosts file
+echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
+echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null && \
+echo "192.168.65.100  master.puppet.vm  master" | sudo tee --append /etc/hosts 2> /dev/null && \
+echo "192.168.65.101  node1.puppet.vm  node1" | sudo tee --append /etc/hosts 2> /dev/null && \
+echo "192.168.65.102  node2.puppet.vm  node2" | sudo tee --append /etc/hosts 2> /dev/null
 
+
+#install git
+
+apt-get -y install git
+
+
+#add a hack to enable non-interactive clonning
+touch /root/.ssh/known_hosts
+ssh-keygen -F github.com || ssh-keyscan github.com >>/root/.ssh/known_hosts
+
+mkdir -p /opt/puppet-dev
+cd /opt/puppet-dev
+git clone -b marcin_dev --single-branch git@github.com:moolibdensplk/control_repo.git
+
+
+echo "RUNNING Shahzad script part"
+sleep 10
 
 
 # Fixing the '/var/lib/dpkg/lock' error when PE is being installed.
@@ -37,19 +54,6 @@ echo '{' >> pe.conf
 echo '"console_admin_password"': '"puppet"' >> pe.conf
 echo '"puppet_enterprise::puppet_master_host"': '"master.puppet.vm"' >> pe.conf
 echo '}' >> pe.conf
-
-#install git
-
-apt-get -y install git
-
-
-#add a hack to enable non-interactive clonning
-ssh-keygen -F github.com || ssh-keyscan github.com >>~/.ssh/known_hosts
-
-mkdir -p /opt/puppet-dev
-cd /opt/puppet-dev
-git clone -b marcin_dev --single-branch git@github.com:moolibdensplk/control_repo.git
-
 
 # Run Puppet installation
 puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.conf
