@@ -19,6 +19,11 @@ apt-get -y install git
 touch /root/.ssh/known_hosts
 ssh-keygen -F github.com || ssh-keyscan github.com >>/root/.ssh/known_hosts
 
+#copy the root keys to puppet ssh fodler to hack access to github
+cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
+chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
+
+
 mkdir -p /opt/puppet-dev
 cd /opt/puppet-dev
 git clone -b marcin_dev --single-branch git@github.com:moolibdensplk/control_repo.git
@@ -60,7 +65,7 @@ puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.
 
 
 # copy the Classification from the console (4 settings)
-puppet_enterprise::profile::master :: code_manager_auto_configure 
+#puppet_enterprise::profile::master :: code_manager_auto_configure 
 
 
 
