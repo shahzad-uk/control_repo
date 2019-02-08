@@ -40,8 +40,11 @@ echo '}' >> pe.conf
 
 #install git
 
-apt-get install git
+apt-get -y install git
 
+
+#add a hack to enable non-interactive clonning
+ssh-keygen -F github.com || ssh-keyscan github.com >>~/.ssh/known_hosts
 
 mkdir -p /opt/puppet-dev
 cd /opt/puppet-dev

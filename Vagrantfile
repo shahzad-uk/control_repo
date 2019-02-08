@@ -6,10 +6,50 @@
 # read vm and chef configurations from JSON files
 nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 
+private_key_path = File.join(Dir.home, ".ssh", "id_rsa")
+public_key_path = File.join(Dir.home, ".ssh", "id_rsa.pub")
+insecure_key_path = File.join(Dir.home, ".vagrant.d", "insecure_private_key")
+
+private_key = IO.read(private_key_path)
+public_key = IO.read(public_key_path)
+
+
+
+
+
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
+  config.ssh.insert_key = false
+  config.ssh.private_key_path = [ private_key_path, insecure_key_path ]
+
+  config.vm.provision :shell, :inline => <<-SCRIPT
+    set -e
+
+    #hascking the ssh keys to pull files from GIT using ssh protocol.
+    echo '#{private_key}' > /home/vagrant/.ssh/id_rsa
+    chmod 600 /home/vagrant/.ssh/id_rsa
+    chown vagrant:vagrant /home/vagrant/.ssh/id_rsa
+    echo '#{public_key}' > /home/vagrant/.ssh/authorized_keys
+    chmod 600 /home/vagrant/.ssh/authorized_keys
+    chown vagrant:vagrant /home/vagrant/.ssh/authorized_keys
+    echo '#{public_key}' > /home/vagrant/.ssh/id_rsa.pub
+    chmod 600 /home/vagrant/.ssh/id_rsa.pub
+    chown vagrant:vagrant /home/vagrant/.ssh/id_rsa.pub
+
+    #hascking the ssh keys to pull files from GIT using ssh protocol.
+    sudo bash -c "echo '#{private_key}' > /root/.ssh/id_rsa"
+    sudo bash -c "chmod 600 /root/.ssh/id_rsa"
+    sudo bash -c "echo '#{public_key}' > /root/.ssh/authorized_keys"
+    sudo bash -c "chmod 600 /root/.ssh/authorized_keys"
+    sudo bash -c "echo '#{public_key}' > /root/.ssh/id_rsa.pub"
+    sudo bash -c "chmod 600 /root/.ssh/id_rsa.pub"
+    sleep 10
+    echo "GOING TO INSTALL MASTER OF PUPPETS"
+
+
+  SCRIPT
 
   nodes_config.each do |node|
     node_name   = node[0] # name of node
@@ -33,17 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--name", node_name]
       end
 
-      machine.vm.provider 'shell' do |s|
-      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
-      ssh_priv_key = File.readlines("#{Dir.home}/.ssh/id_rsa").first.strip
-      s.inline = <<-SHELL
-         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-         sudo bash -c "echo #{ssh_pub_key} >> /root/.ssh/authorized_keys"
-         echo #{ssh_pub_key} >> /home/vagrant/.ssh/id_rsa.pub
-         echo #{ssh_priv_key} >> /home/vagrant/.ssh/id_rsa
-         sudo bash -c "echo #{ssh_priv_key} >> /home/root/.ssh/id_rsa"
-        SHELL
-      end
+
 
       config.vm.provision :shell, :path => node_values[':bootstrap']
     end
