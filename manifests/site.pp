@@ -6,6 +6,6 @@ node default {
 }
 
 node node1.puppet.vm {
-	include role::apache::devserver::devserver
-	include role::jenkins::devmaster::devmaster
+	include role::apache::devserver
+	include role::jenkins::devmaster
 }
