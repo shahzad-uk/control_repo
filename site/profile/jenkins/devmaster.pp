@@ -1,4 +1,4 @@
-class profile::jenkins::master (
+class profile::jenkins::devmaster (
   String $jenkins_port = '9091',
   String $java_dist    = 'jdk',
   String $java_version = 'latest',

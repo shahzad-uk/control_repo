@@ -1,4 +1,4 @@
-class profile::apache::server {
+class profile::apache::devserver {
 
   class { 'ntp':
 	  enable => false;
