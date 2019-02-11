@@ -1,5 +1,8 @@
 node default {
-  include "role::${::role}"
+  file { '/tmp/hello.txt':
+  ensure  => file,
+  content => "hello, world\n",
+  }
 }
 
 node node1.puppet.vm {
