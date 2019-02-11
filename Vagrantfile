@@ -6,8 +6,8 @@
 # read vm and chef configurations from JSON files
 nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 
-private_key_path = File.join(Dir.home, ".ssh", "id_rsa")
-public_key_path = File.join(Dir.home, ".ssh", "id_rsa.pub")
+private_key_path = File.join(Dir.home, ".ssh", "puppet_id_rsa")
+public_key_path = File.join(Dir.home, ".ssh", "puppet_id_rsa.pub")
 insecure_key_path = File.join(Dir.home, ".vagrant.d", "insecure_private_key")
 
 private_key = IO.read(private_key_path)
