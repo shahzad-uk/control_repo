@@ -8,3 +8,20 @@ sudo service puppetmaster start
 sudo puppet cert list --all # check for 'puppet' cert
 
 
+
+
+To configure Puppet-Code:
+
+1. generate a token:
+puppe access login
+
+2. run status check:
+puppet-code -t ~/.puppetlabs/token status
+
+3. run a deploy dry-run
+puppet-code -t ~/.puppetlabs/token deploy --all --dry-run
+
+4. Deploy environments :
+puppet-code -t ~/.puppetlabs/token deploy --all 
+
+

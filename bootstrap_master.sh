@@ -20,8 +20,8 @@ touch /root/.ssh/known_hosts
 ssh-keygen -F github.com || ssh-keyscan github.com >>/root/.ssh/known_hosts
 
 #copy the root keys to puppet ssh fodler to hack access to github
-cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
-chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
+#cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
+#chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
 
 
 echo "RUNNING Shahzad script part"
@@ -54,7 +54,7 @@ echo '{' >> pe.conf
 echo '"console_admin_password"': '"puppet"' >> pe.conf
 echo '"puppet_enterprise::puppet_master_host"': '"master.puppet.vm"' >> pe.conf
 echo '"puppet_enterprise::profile::master::r10k_remote": "git@github.com:moolibdensplk/control_repo.git"' >> pe.conf
-echo '"puppet_enterprise::profile::master::r10k_private_key": "/etc/puppetlabs/puppetserver/ssh/id-rsa"' >> pe.conf
+echo '"puppet_enterprise::profile::master::r10k_private_key": "/etc/puppetlabs/puppetserver/ssh/id_rsa"' >> pe.conf
 echo '"puppet_enterprise::profile::master::code_manager_auto_configure": true' >> pe.conf
 echo '}' >> pe.conf
 
