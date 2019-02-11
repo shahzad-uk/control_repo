@@ -1,5 +1,4 @@
 node /^node\d+\.puppet.vm$/ {
-	include role::apache::master
+	include role::apache::server
 	include role::jenkins::master
-	
 }
