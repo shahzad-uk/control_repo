@@ -1,4 +1,5 @@
 class role::apache::devserver {
-  require apache
+  include apache::base
+  include apache::server
   include profile::apache::devserver
 }
