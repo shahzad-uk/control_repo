@@ -69,5 +69,7 @@ chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
 
 echo "*.puppet.vm" >> /etc/puppetlabs/puppet/autosign.conf
 
+curl -k -X POST -H 'Content-Type: application/json' -d '{"login": "admin", "password": "puppet", "lifetime":"1y"}' https://master.puppet.vm:4433/rbac-api/v1/auth/token|sed -e's/\(.*\)token\":\"//;s/\"}//' > /root/.puppetlabs/token
 
+puppet-code -t /root/.puppetlabs/token deploy --all --wait
 
