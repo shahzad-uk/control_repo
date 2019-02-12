@@ -4,7 +4,7 @@ class profile::apache::prodserver {
 	  
 	  suphp_engine                   => 'off',
  	  port => 80,
-      servername => 'prod.puppet.vm'
+      servername => 'prod.puppet.vm',
 	  docroot => '/var/www/production',
 	  options => 'Indexes MultiViews',
 	}
