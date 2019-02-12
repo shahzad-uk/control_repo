@@ -10,3 +10,8 @@ node node1.puppet.vm {
 	include role::apache::devserver
   #include role::jenkins::devmaster
 }
+
+node node2.puppet.vm {
+	include role::apache::prodserver
+  
+}
