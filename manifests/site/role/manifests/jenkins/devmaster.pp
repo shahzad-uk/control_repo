@@ -1,4 +1,4 @@
 class role::jenkins::devmaster {
-  include profile::jenkins::base
+  require jenkins
   include profile::jenkins::devmaster
 }
