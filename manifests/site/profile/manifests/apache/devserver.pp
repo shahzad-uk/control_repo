@@ -2,7 +2,7 @@ class profile::apache::devserver {
 
 	apache::vhost {'personal_site':
 	  #Enum['On', 'Off'] $sendfile                       => 'Off',
-	  suphp_engine                   => 'Off',
+	  suphp_engine                   => 'off',
  	  port => 80,
 		docroot => '/var/www/personal',
 		options => 'Indexes MultiViews',
