@@ -15,7 +15,7 @@ class profile::dbserver::proddb {
   mysql::db {'proddb':
     user     => 'www',
     password => 'www',
-    host     => '*.puppet.vm',
+    host     => 'prod.puppet.vm',
     grant    => ['SELECT', 'UPDATE'],
   }
 

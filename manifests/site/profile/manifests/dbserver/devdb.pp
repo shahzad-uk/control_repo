@@ -15,7 +15,7 @@ class profile::dbserver::devdb {
   mysql::db {'devdb':
     user     => 'developer',
     password => 'developer',
-    host     => '*',
+    host     => 'dev.puppet.vm',
     grant    => ['SELECT', 'UPDATE'],
   }
 
