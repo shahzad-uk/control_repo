@@ -1,11 +1,14 @@
 class profile::apache::devserver {
 
-	apache::vhost {'personal_site':
-	  #Enum['On', 'Off'] $sendfile                       => 'Off',
+	apache::vhost {'dev_site':
+	  
 	  suphp_engine                   => 'off',
  	  port => 80,
-		docroot => '/var/www/personal',
+		docroot => '/var/www/dev',
 		options => 'Indexes MultiViews',
 	}
-
+    file { '/var/www/production/index.html':
+      ensure  => file,
+      content => "<H1>Welcome to DEV Website</H1>\n",
+    }
 }
