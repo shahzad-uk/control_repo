@@ -1,4 +1,4 @@
 class role::jenkins::devmaster {
-  # bleh
+  include jenkins
   include profile::jenkins::devmaster
 }
