@@ -67,9 +67,7 @@ puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.
 cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
 chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
 
-
-
-
+echo "*.puppet.vm" >> /etc/puppetlabs/puppet/autosign.conf
 
 
 
