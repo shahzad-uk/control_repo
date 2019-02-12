@@ -1,4 +1,4 @@
 class role::apache::devserver {
-  #bleh
+  include profile::apache::base
   include profile::apache::devserver
 }
