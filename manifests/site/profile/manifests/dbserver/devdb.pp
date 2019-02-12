@@ -12,7 +12,6 @@ class profile::dbserver::devdb {
       'log-error' => '/var/log/mysqld.log',
     }
   }
-  }
   mysql::db {'devdb':
     user     => 'developer',
     password => 'developer',
