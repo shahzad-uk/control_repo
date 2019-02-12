@@ -52,7 +52,7 @@ tar xvfz puppet-enterprise-2018.1.7-ubuntu-16.04-amd64.tar.gz
 touch pe.conf
 echo '{' >> pe.conf
 echo '"console_admin_password"': '"puppet"' >> pe.conf
-echo '"autosign": true' >> pe.conf
+echo '"puppet_enterprise::profile::master::autosign": true' >> pe.conf
 echo '"puppet_enterprise::puppet_master_host"': '"master.puppet.vm"' >> pe.conf
 echo '"puppet_enterprise::profile::master::code_manager_auto_configure": true' >> pe.conf
 echo '"puppet_enterprise::profile::master::r10k_remote": "git@github.com:moolibdensplk/control_repo.git"' >> pe.conf
