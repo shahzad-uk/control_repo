@@ -7,8 +7,8 @@ class profile::dbserver::devdb {
   }
   $override_options = {
     'mysqld' => {
-      'log_bin' => 'ON',
-      'bind_address' => '0.0.0.0',
+      'log-bin' => 'ON',
+      'bind-address' => '0.0.0.0',
       'log-error' => '/var/log/mysqld.log',
     }
   }
