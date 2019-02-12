@@ -67,9 +67,13 @@ puppet-enterprise-2018.1.7-ubuntu-16.04-amd64/puppet-enterprise-installer -c pe.
 cp /root/.ssh/id* /etc/puppetlabs/puppetserver/ssh/
 chown pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh/*
 
+## Automation HACKZ
+# certificate autosign stuff
 echo "*.puppet.vm" >> /etc/puppetlabs/puppet/autosign.conf
+service pe-puppetserver restart
 
+# Initial code deployment
+mkdir /root/.puppetlabs
 curl -k -X POST -H 'Content-Type: application/json' -d '{"login": "admin", "password": "puppet", "lifetime":"1y"}' https://master.puppet.vm:4433/rbac-api/v1/auth/token|sed -e's/\(.*\)token\":\"//;s/\"}//' > /root/.puppetlabs/token
-
-puppet-code -t /root/.puppetlabs/token deploy --all --wait
+/opt/puppetlabs/bin/puppet-code -t /root/.puppetlabs/token deploy --all --wait
 
