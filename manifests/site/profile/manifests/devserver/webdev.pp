@@ -1,4 +1,4 @@
-class profile::dbserver::proddb {
+class profile::devserver::devdb {
   include mysql::client
   
   class { '::mysql::server':
@@ -13,10 +13,10 @@ class profile::dbserver::proddb {
       'log-error' => '/var/log/mysqld.log',
     }
   }
-  mysql::db {'proddb':
-    user     => 'www',
-    password => 'www',
-    host     => 'prod.puppet.vm',
+  mysql::db {'devdb':
+    user     => 'developer',
+    password => 'developer',
+    host     => 'dev.puppet.vm',
     grant    => ['SELECT', 'UPDATE'],
   }
 

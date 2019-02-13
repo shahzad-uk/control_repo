@@ -1,4 +1,4 @@
-class profile::apache::prodserver {
+class profile::prodserver::webprod {
   include apache
 	
 	apache::vhost {'000-prod_site':

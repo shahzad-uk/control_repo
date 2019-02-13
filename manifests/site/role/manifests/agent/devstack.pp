@@ -1,4 +1,4 @@
 class role::agent::devstack {
-  include profile::apache::devserver
-  include profile::dbserver::devdb
+  include profile::devserver::webdev
+  include profile::devserver::devdb
 }

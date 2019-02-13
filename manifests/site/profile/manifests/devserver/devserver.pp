@@ -1,4 +1,4 @@
-class profile::apache::devserver {
+class profile::devserver::webdev {
   include apache
 	
 	apache::vhost {'000-dev_site':
