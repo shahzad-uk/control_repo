@@ -1,5 +1,6 @@
 class profile::apache::devserver {
-
+  include apache
+	
 	apache::vhost {'000-dev_site':
 	  
 	  suphp_engine                   => 'off',

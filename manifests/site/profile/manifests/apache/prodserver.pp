@@ -1,5 +1,6 @@
 class profile::apache::prodserver {
-
+  include apache
+	
 	apache::vhost {'000-prod_site':
 	  
 	  suphp_engine                   => 'off',
