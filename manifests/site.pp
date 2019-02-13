@@ -1,17 +1,17 @@
-node default {
+node master.puppet.vm {
   file { '/tmp/hello.txt':
   ensure  => file,
-  content => "hello, world\n",
+  content => "Puppet is DEPLOYED now !!!\n",
   }
 }
 
 
 node node1.puppet.vm {
-	include role::apache::devserver
-  include role::dbserver::devdb
+	include role::agent::devweb
+  include role::agent::devdb
 }
 
 node node2.puppet.vm {
-	include role::apache::prodserver
-  include role::dbserver::proddb
+	include role::agent::prodweb
+  include role::agent::proddb
 }

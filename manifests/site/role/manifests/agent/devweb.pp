@@ -1,4 +1,4 @@
-class role::apache::devserver {
+class role::agent::devweb {
   include apache
   include profile::apache::devserver
 }

@@ -1,4 +1,4 @@
-class role::apache::prodserver {
+class role::agent::prodweb {
   include apache
   include profile::apache::prodserver
 }

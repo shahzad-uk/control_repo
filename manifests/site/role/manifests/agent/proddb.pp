@@ -1,4 +1,4 @@
-class role::dbserver::proddb {
+class role::agent::proddb {
   include mysql::client
   include profile::dbserver::proddb
 }
