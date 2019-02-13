@@ -1,5 +1,6 @@
 class profile::dbserver::proddb {
-
+  include mysql::client
+  
   class { '::mysql::server':
     root_password           => 'verystrongpassword',
     remove_default_accounts => true,
