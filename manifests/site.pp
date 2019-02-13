@@ -7,11 +7,11 @@ node master.puppet.vm {
 
 
 node node1.puppet.vm {
-	include role::agent::devweb
-  include role::agent::devdb
+	include role::agent::devstack
+  
 }
 
 node node2.puppet.vm {
-	include role::agent::prodweb
-  include role::agent::proddb
+	include role::agent::prodstack
+  
 }
