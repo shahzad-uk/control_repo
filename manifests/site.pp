@@ -8,7 +8,9 @@ node master.puppet.vm {
 
 node node1.puppet.vm {
 	include role::agent::devstack
-  
+  class { 'ntp':
+    servers => ['3.uk.pool.ntp.org', '2.uk.pool.ntp.org']
+  }
 }
 
 node node2.puppet.vm {
